@@ -6,16 +6,11 @@ import {
 import styled from 'styled-components/native';
 
 import {TABS} from '../../utils/screens';
-import Flights from '../../views/App/Tabs/Shows';
+import Shows from '../../views/App/Tabs/Shows';
 import Home from '../../views/App/Tabs/Home';
-import Notifications from '../../views/App/Tabs/Movies';
-import More from '../../views/App/Tabs/Settings';
-import {
-  BookIcon,
-  MoreIcon,
-  NotificationIcon,
-  TripsIcon,
-} from '../../utils/icons';
+import Movies from '../../views/App/Tabs/Movies';
+
+import {HomeIcon, MovieIcon, ShowIcon} from '../../utils/icons';
 import {ThemedText} from '../../components/themed';
 
 const Tab = createBottomTabNavigator();
@@ -50,11 +45,13 @@ const AppTabBar = ({state, navigation}: BottomTabBarProps) => {
 
 const ButtomTab = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}} tabBar={AppTabBar}>
+    <Tab.Navigator
+      screenOptions={{headerShown: false, lazy: false}}
+      tabBar={AppTabBar}>
       <Tab.Screen name={TABS.HOME} component={Home} options={{}} />
-      <Tab.Screen name={TABS.MOVIES} component={Flights} />
-      <Tab.Screen name={TABS.SHOWS} component={Notifications} />
-      <Tab.Screen name={TABS.SETTINGS} component={More} />
+      <Tab.Screen name={TABS.MOVIES} component={Movies} />
+      <Tab.Screen name={TABS.SHOWS} component={Shows} />
+      {/* <Tab.Screen name={TABS.SETTINGS} component={More} /> */}
     </Tab.Navigator>
   );
 };
@@ -74,7 +71,12 @@ const StyledBottomTabItem = styled.TouchableOpacity`
   padding-top: 10px;
 `;
 
-const ICONS = [<BookIcon />, <TripsIcon />, <NotificationIcon />, <MoreIcon />];
+const ICONS = [
+  <HomeIcon width={24} height={24} />,
+  <MovieIcon />,
+  <ShowIcon />,
+  // <MoreIcon />,
+];
 const getIcon = (index: number, isFocused: boolean) => {
   const focusedColor = '#316EDB';
 

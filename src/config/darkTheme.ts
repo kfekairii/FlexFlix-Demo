@@ -12,5 +12,5 @@ export const darkTheme: DefaultTheme = {
     gray: '#DDDDE4',
     lightGray: '#DDDDE444',
   },
-  typography: {lg: 28, sm: 14, xs: 9},
+  typography: {lg: 28, sm: 14, xs: 9, md: 16},
 };

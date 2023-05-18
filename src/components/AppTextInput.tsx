@@ -40,7 +40,6 @@ const TextInputContainer = styled.View`
   flex-direction: row;
   border: 1px solid ${props => props.theme.colors.primary};
   border-radius: 16px;
-  margin-top: 8px;
   align-items: center;
   padding-left: 8px;
   height: 56px;

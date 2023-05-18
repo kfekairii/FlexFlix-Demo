@@ -23,6 +23,7 @@ interface ThemedTextProps {
   mr?: number;
   ml?: number;
   mt?: number;
+  mb?: number;
   center?: boolean;
 }
 export const ThemedText = styled.Text<ThemedTextProps>`
@@ -60,12 +61,14 @@ export const ThemedText = styled.Text<ThemedTextProps>`
 
   font-size: ${props => {
     switch (props.fontSize) {
-      case 'lg':
-        return props.theme.typography.lg;
-      case 'sm':
-        return props.theme.typography.sm;
       case 'xs':
         return props.theme.typography.xs;
+      case 'sm':
+        return props.theme.typography.sm;
+      case 'md':
+        return props.theme.typography.md;
+      case 'lg':
+        return props.theme.typography.lg;
       default:
         return 16;
     }
@@ -74,6 +77,7 @@ export const ThemedText = styled.Text<ThemedTextProps>`
   margin-right: ${props => props.mr ?? 0}px;
   margin-left: ${props => props.ml ?? 0}px;
   margin-top: ${props => props.mt ?? 0}px;
+  margin-bottom: ${props => props.mb ?? 0}px;
 `;
 
 interface ThemedButtonProps {

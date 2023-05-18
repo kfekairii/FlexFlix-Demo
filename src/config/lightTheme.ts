@@ -4,7 +4,7 @@ export const lightTheme: DefaultTheme = {
   colors: {
     primary: '#2557AF',
     primaryLight: '#316EDB',
-    primaryLighter: '#316EDB99',
+    primaryLighter: '#316EDB33',
     secondary: '#3B867D',
     background: '#fff',
     text: '#000',
@@ -12,5 +12,5 @@ export const lightTheme: DefaultTheme = {
     gray: '#DDDDE4',
     lightGray: '#44444444',
   },
-  typography: {lg: 28, sm: 14, xs: 11},
+  typography: {xs: 11, sm: 14, md: 18, lg: 24},
 };

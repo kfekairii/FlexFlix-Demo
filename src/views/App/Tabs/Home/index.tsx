@@ -1,17 +1,49 @@
-import {StatusBar} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
 import React, {FC} from 'react';
 import {basic} from '../../../../utils/types';
-import {AppScreen} from '../../../../components/themed';
+import {AppScreen, ThemedText} from '../../../../components/themed';
 import {Header} from '../../../../components/Header';
+import styled from 'styled-components/native';
+import {FlatList, ScrollView} from 'react-native';
+import MovieCard from '../../../../components/MovieCard';
+import MovieListItem from '../../../../components/MovieListItem';
 
 type props = basic & {};
-const Book: FC<props> = () => {
+const Home: FC<props> = () => {
   return (
     <AppScreen>
       <Header />
-      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+      <Container>
+        <TrendingSection>
+          <ThemedText fontWeight="bold" fontSize="md" mb={16}>
+            Trending
+          </ThemedText>
+          <ScrollView horizontal style={{paddingBottom: 10}}>
+            {[1, 2, 3, 4].map((item, index) => {
+              return <MovieCard key={index} />;
+            })}
+          </ScrollView>
+        </TrendingSection>
+        <PopularSection>
+          <ThemedText fontWeight="bold" fontSize="md" mb={16}>
+            Popular
+          </ThemedText>
+          <FlatList
+            data={[1, 2, 3, 4, 5, 6]}
+            renderItem={() => {
+              return <MovieListItem />;
+            }}
+          />
+        </PopularSection>
+      </Container>
     </AppScreen>
   );
 };
 
-export default Book;
+const Container = styled.ScrollView`
+  padding: 12px;
+`;
+const TrendingSection = styled.View``;
+const PopularSection = styled.View``;
+
+export default Home;

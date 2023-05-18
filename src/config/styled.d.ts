@@ -17,6 +17,7 @@ declare module 'styled-components' {
       lg: number;
       xs: number;
       sm: number;
+      md: number;
     };
   }
 }

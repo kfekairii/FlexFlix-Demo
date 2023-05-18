@@ -9,6 +9,13 @@ import NotificationIcon from '../../assets/icons/notification.svg';
 import MoreIcon from '../../assets/icons/more.svg';
 import EmailIcon from '../../assets/icons/email.svg';
 import PasswordIcon from '../../assets/icons/password.svg';
+import LogoIcon from '../../assets/icons/headerlogo.svg';
+import HomeIcon from '../../assets/icons/home.svg';
+import StarIcon from '../../assets/icons/star.svg';
+import ClockIcon from '../../assets/icons/appclock.svg';
+import MovieIcon from '../../assets/icons/movie.svg';
+import ShowIcon from '../../assets/icons/show.svg';
+import BackArrowIcon from '../../assets/icons/back-arrow.svg';
 
 export {
   HeaderIcon,
@@ -22,4 +29,11 @@ export {
   MoreIcon,
   EmailIcon,
   PasswordIcon,
+  LogoIcon,
+  HomeIcon,
+  StarIcon,
+  ClockIcon,
+  MovieIcon,
+  ShowIcon,
+  BackArrowIcon,
 };
