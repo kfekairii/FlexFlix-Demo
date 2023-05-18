@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {basic} from '../../../utils/types';
 import {ThemedText} from '../../../components/themed';
 
@@ -7,10 +7,26 @@ import {EmailIcon, PasswordIcon} from '../../../utils/icons';
 import {RoundedButton} from '../../../components/RoundedButton';
 import SCREENS from '../../../utils/screens';
 import AppTextInput from '../../../components/AppTextInput';
+import {signup} from '../../../services/auth';
 
 type props = basic & {};
 const Register: FC<props> = ({navigation}) => {
   const theme = useTheme();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+
+  const handleRegister = async () => {
+    try {
+      setLoading(true);
+      await signup(email, password);
+      // navigation.navigate(SCREENS.MAIN);
+    } catch (err) {
+      console.log('🚀 -> file: index.tsx:23 -> handleRegister -> err:', err);
+      setLoading(false);
+    }
+  };
+
   return (
     <StyledScreen>
       <HeaderContainer>
@@ -28,6 +44,10 @@ const Register: FC<props> = ({navigation}) => {
           leftIcon={
             <EmailIcon width={20} height={20} color={theme.colors.primary} />
           }
+          onChangeText={value => {
+            setEmail(value);
+          }}
+          value={email}
         />
         <AppTextInput
           lable="Password"
@@ -36,12 +56,19 @@ const Register: FC<props> = ({navigation}) => {
             <PasswordIcon width={20} height={20} color={theme.colors.primary} />
           }
           secureTextEntry
+          onChangeText={value => {
+            setPassword(value);
+          }}
+          value={password}
         />
         <RoundedButton
           text="Register"
-          color="primary"
           textColor="white"
           mt={48}
+          onPress={handleRegister}
+          color={email.length < 6 || password.length < 4 ? 'gray' : 'primary'}
+          disabled={email.length < 6 || password.length < 4 || loading}
+          loading={loading}
         />
       </FormContainer>
       <Divider />
