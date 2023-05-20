@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {FC} from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {ThemedText} from './themed';
@@ -10,19 +10,26 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import SCREENS from '../utils/screens';
+import {Movie} from '../services/res-types';
 
-const MovieCard = () => {
+interface MovieCardProps {
+  movie: Movie;
+  type: 'movie' | 'tv';
+}
+
+const MovieCard: FC<MovieCardProps> = ({movie, type}) => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
   return (
     <Container
       onPress={() => {
-        navigation.navigate(SCREENS.MOVIE_DETAILS);
+        navigation.navigate(SCREENS.MOVIE_DETAILS, {movie, type});
       }}>
       <ImageContainer style={{elevation: 8}}>
         <Image
           alt="movie"
           source={{
-            uri: 'https://www.themoviedb.org/t/p/w440_and_h660_face/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg',
+            uri: `https://image.tmdb.org/t/p/original${movie?.poster_path}`,
           }}
           style={{
             width: 143,
@@ -32,12 +39,12 @@ const MovieCard = () => {
         />
       </ImageContainer>
       <ThemedText fontSize="sm" fontWeight="semibold">
-        Spiderman: No Way Home
+        {movie?.title ?? movie?.name}
       </ThemedText>
       <RatingContainer>
         <StarIcon />
         <ThemedText fontSize="sm" fontWeight="light" color="tint" ml={4}>
-          9.1/10
+          {movie?.vote_average}/10
         </ThemedText>
       </RatingContainer>
     </Container>

@@ -1,19 +1,38 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {FC} from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {ThemedText} from './themed';
-import {ClockIcon, StarIcon} from '../utils/icons';
+import {StarIcon} from '../utils/icons';
 import Badge from './Badge';
+import {Movie} from '../services/res-types';
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from '@react-navigation/native';
+import SCREENS from '../utils/screens';
 
-const MovieListItem = () => {
+interface MovieListItemProps {
+  movie: Movie;
+  type: 'movie' | 'tv';
+}
+
+const MovieListItem: FC<MovieListItemProps> = ({movie, type}) => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
   return (
-    <Container>
+    <Container
+      onPress={() => {
+        navigation.navigate(SCREENS.MOVIE_DETAILS, {movie, type});
+      }}>
       <ImageContainer style={{elevation: 8}}>
         <Image
           alt="movie"
           source={{
-            uri: 'https://www.themoviedb.org/t/p/w440_and_h660_face/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg',
+            uri: `https://www.themoviedb.org/t/p/w500/${
+              movie?.poster_path ?? movie?.backdrop_path
+            }`,
           }}
           style={{
             width: 85,
@@ -24,12 +43,12 @@ const MovieListItem = () => {
       </ImageContainer>
       <DetailsContainer>
         <ThemedText fontSize="sm" fontWeight="semibold" mb={8}>
-          Spiderman: No Way Home
+          {movie?.title ?? movie?.name}
         </ThemedText>
         <RatingContainer>
           <StarIcon />
           <ThemedText fontSize="sm" fontWeight="light" color="tint" ml={4}>
-            9.1/10
+            {movie?.vote_average}/10
           </ThemedText>
         </RatingContainer>
         <BadgeContainer>
@@ -37,18 +56,13 @@ const MovieListItem = () => {
             return <Badge text="BADGE" />;
           })}
         </BadgeContainer>
-        <DurationContainer>
-          <ClockIcon color={'black'} />
-          <ThemedText fontSize="xs" ml={4}>
-            1h 47min
-          </ThemedText>
-        </DurationContainer>
+        {movie.media_type && <ThemedText>{movie.media_type}</ThemedText>}
       </DetailsContainer>
     </Container>
   );
 };
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   margin-bottom: 16px;
   padding-left: 12px;
   flex-direction: row;
@@ -67,11 +81,6 @@ const RatingContainer = styled.View`
   margin-bottom: 8px;
 `;
 const BadgeContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 8px;
-`;
-const DurationContainer = styled.View`
   flex-direction: row;
   align-items: center;
   margin-bottom: 8px;

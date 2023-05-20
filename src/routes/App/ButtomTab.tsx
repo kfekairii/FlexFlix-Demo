@@ -7,7 +7,6 @@ import styled from 'styled-components/native';
 
 import {TABS} from '../../utils/screens';
 import Shows from '../../views/App/Tabs/Shows';
-import Home from '../../views/App/Tabs/Home';
 import Movies from '../../views/App/Tabs/Movies';
 
 import {HomeIcon, MovieIcon, ShowIcon} from '../../utils/icons';
@@ -48,7 +47,6 @@ const ButtomTab = () => {
     <Tab.Navigator
       screenOptions={{headerShown: false, lazy: false}}
       tabBar={AppTabBar}>
-      <Tab.Screen name={TABS.HOME} component={Home} options={{}} />
       <Tab.Screen name={TABS.MOVIES} component={Movies} />
       <Tab.Screen name={TABS.SHOWS} component={Shows} />
       {/* <Tab.Screen name={TABS.SETTINGS} component={More} /> */}
