@@ -1,5 +1,8 @@
 # FlexFLix Demo
-## Run it locally
+## Download the application APK
+https://drive.google.com/file/d/1YN-aP2lbbeunTs1MxK1bhy9XtstREPE_/view?usp=share_link
+
+## Run it in development mode
 ### You have to install React Native development envirement.
 ```
 npm run android
